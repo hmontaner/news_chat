@@ -1,22 +1,30 @@
-NEWS CHAT
-==========================================
+# NEWS CHAT
 News Chat (also known as Forum App) is an Android app that allows users to chat about news articles.
-You can configure the backend of this app to fetch news articles from the source of your choice,
+You can configure the backend of this app to fetch news articles from the source of your choice:
 just pick an RSS feed you like and follow this guide to set up the backend and app.
 
-The rest of this guide has two main parts: first you can follow the 8 steps to set up the backend,
+<div>
+  <img src="./screenshots/screenshot_1.png" width="160"/>
+  <img src="./screenshots/screenshot_2.png" width="160"/>
+  <img src="./screenshots/screenshot_3.png" width="160"/>
+  <img src="./screenshots/screenshot_4.png" width="160"/>
+</div>
+<BR/>
+You can try the app in the Play Store: https://play.google.com/store/apps/details?id=app.forum
+
+<a href="https://play.google.com/store/apps/details?id=app.forum"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Play Store icon" width="200"/></a>
+
+The rest of this guide has two parts: first you can follow the 8 steps to set up the backend,
 then you can read about the structure and design of the code.
 
-You can try the app in https://play.google.com/store/apps/details?id=app.forum
+## 1. Create Firebase Project
 
-1. Create Firebase Project
-------------------------------------------
 The backend for this app is included in this package and must be set up before you can use the app.
 It is developed using Google's Firebase technology. The first step is to create a new Firebase project;
 you can find all the info in https://firebase.google.com.
 
-2. Create a Cloud Firestore database
-------------------------------------------
+## 2. Create a Cloud Firestore database
+
 The app stores its data (e.g. messages) in a Cloud Firestore database.
 You can follow the steps to create it in https://firebase.google.com/docs/firestore/quickstart#create
 (ignore the subsequent steps to configure the Android app as it is already done).
@@ -25,8 +33,8 @@ Then you need to set up the database Rules that regulate permissions
 Firebase Console > Firestore database > Rules, and copy the content of the
 file `rules.txt` that you can find in this package.
 
-3. Setup your RSS feed
-------------------------------------------
+## 3. Setup your RSS feed
+
 Once your database is created, you need to manually add at least one RSS feed.
 The backend will periodically fetch news articles from there and store them in the database.
 Any standard RSS feed should work, for example
@@ -41,8 +49,8 @@ Write down the id of this document as you will have to use it in the app.
 In the app code, file "FirestoreRepository.kt", in the Companion Object there is a variable
 named SOURCE that has to be initialised to the id of the document you just created.
 
-4. Enable Authentication
-------------------------------------------
+## 4. Enable Authentication
+
 The app allows users to enter by just choosing a name.
 For that, you need to allow anonymous loging in Firebase.
 The app also allows users to login using a Google account.
@@ -54,14 +62,14 @@ Additionally, if you are enabling Google Login,
 you have to set up your app's SHA-1 fingerprint on your Project Settings
 (see the relevant step in https://firebase.google.com/docs/auth/android/google-signin).
 
-5. Enable Push Notifications (optional)
-------------------------------------------
+## 5. Enable Push Notifications (optional)
+
 This app sends push notifications when somebody replies or likes a user's comments.
 To activate this feature, you have to enable Cloud Messaging from the Google Cloud Console:
 APIs & Services > Enable Apis And Services, then search for Cloud Messaging and enable that API.
 
-6. Cloud Functions
-------------------------------------------
+## 6. Cloud Functions
+
 Cloud functions constitute the code of the backend.
 It is supplied within this package in the directory `backend`.
 It is a set of functions that are executed in the server when certain events happen,
@@ -79,20 +87,20 @@ although it is typically free as the usage of this app is under the free tier
 until you reach a few thousands of users. You can follow the guide in here
 https://firebase.google.com/docs/functions/schedule-functions.
 
-7. Connect Firebase to your Android app
-------------------------------------------
+## 7. Connect Firebase to your Android app
+
 You need to do two main things to connect your backend to your app.
 First register your app in the Firebase Console and then download the Firebase configuration file
 (google-services.json) and add it to the root directory of your app project.
 You can follow this guide: https://firebase.google.com/docs/android/setup#console
 
-8. Change your Application Id
-------------------------------------------
+## 8. Change your Application Id
+
 Before publishing in Google Play you need to change the Application Id of your app as it has to be unique.
 For that, go to the app file `build.gradle` and change the value of `applicationId` to something of your choice.
 
-Source Code Structure and Design
-------------------------------------------
+## Source Code Structure and Design
+
 `LoginActivity` is the initial Activity of the app.
 It allows users to set a name and, optionally, login using a Google account.
 If users decide to not login now they can do later in the Settings Activity.
