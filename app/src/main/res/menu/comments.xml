@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_link"
+        android:icon="@drawable/ic_baseline_open_in_new_24"
+        android:title="@string/action_link"
+        app:iconTint="#fff"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_report"
+        android:icon="@drawable/ic_baseline_report_24"
+        android:title="@string/action_report"
+        app:iconTint="#fff"
+        app:showAsAction="ifRoom"/>
+</menu>
